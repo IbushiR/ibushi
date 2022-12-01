@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit create destroy ]
+  before_action :set_user, only: %i[  show edit create destroy ]
 
   def index
-    
+  
   end
 
   def new
@@ -20,6 +20,7 @@ class UsersController < ApplicationController
   
   def show
   end
+
 
   def edit
   end
