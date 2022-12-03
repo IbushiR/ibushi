@@ -2,6 +2,6 @@
 
 <%= link_to "プロフィール", "profile" %>
 
-
+<%= link_to "otamesi", new_user_path, remote: true, class: "btn btn-lg, btn-primary" %>
 
 <%= button_to "ログアウト", destroy_user_session_path, method: :delete %>

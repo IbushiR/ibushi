@@ -4,7 +4,15 @@
 
 <%= link_to "プロフィール", profile_path %>
 
+<%= link_to "ツイート", new_tweet_path %>
+
 
 <%= button_to "ログアウト", destroy_user_session_path, method: :delete %>
 
-<%= render "modal_form"  %>
+<% @user.tweets.each do |tweet| %>
+  <ul>
+    <li><%= tweet.content %></li>
+  </ul>
+<% end %>
+
+<%= link_to "モーダル", new_user_path, remote: true, class: "btn btn-lg, btn-primary" %>

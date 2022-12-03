@@ -1,0 +1,24 @@
+<%= form_with(model: tweet) do |form| %>
+  <% if tweet.errors.any? %>
+    <div style="color: red">
+      <h2><% pluralize(tweet.errors.count, "error") %>間違いあるよ</h2>
+
+        <ul>
+          <% tweet.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :content, "ツイート", style: "display: block" %>
+    <%= form.text_area :content %>
+  </div>
+
+  <div>
+    <%= form.submit "投稿" %>
+  <div>
+
+<% end %>
+  
