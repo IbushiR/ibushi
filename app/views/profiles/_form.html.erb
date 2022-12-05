@@ -1,4 +1,4 @@
-<%= form_with(model: user) do |form| %>
+<%= form_with(model: user, url: profile_path(user)) do |form| %>
   <% if user.errors.any? %>
     <div style="color: red">
       <h2><% pluralize(user.errors.count, "error") %>間違いあるよ</h2>
@@ -22,7 +22,7 @@
   </div>
 
   <div>
-    <%= form.label :description, "コメント", style: "display: block" %>
+    <%= form.label :description, "自己紹介", style: "display: block" %>
     <%= form.text_area :description %>
   </div>
 

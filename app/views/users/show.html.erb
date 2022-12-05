@@ -9,10 +9,28 @@
 
 <%= button_to "ログアウト", destroy_user_session_path, method: :delete %>
 
+<p>自分のツイート</p>
+
 <% @user.tweets.each do |tweet| %>
   <ul>
     <li><%= tweet.content %></li>
   </ul>
 <% end %>
 
-<%= link_to "モーダル", new_user_path, remote: true, class: "btn btn-lg, btn-primary" %>
+<br>
+
+<p>みんなの反応</p>
+
+<% @users.each do |user| %>
+  <% user.tweets.each do |tweetes| %>
+    <ul>
+      <li>
+        <h5><%= user.name %><br></h5>
+        <%= tweetes.content %><br>
+        <%= tweetes.created_at.strftime('%Y/%m/%d %H:%M') %>
+      </li>
+    </ul>
+  <% end %>
+<% end %>
+
+
