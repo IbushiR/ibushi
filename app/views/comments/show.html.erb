@@ -1,0 +1,27 @@
+<div>
+  <p><%= @tweet.content %></p>
+  <p><%= @tweet.user.name %>
+  <p><%= @tweet.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+</div>
+
+<br>
+
+<div>
+  <%= link_to "返信", new_comment_path %>
+</div>
+
+<br>
+
+<div>
+<% @tweet.comments.each do |comment| %>
+  <ul>
+    <li><%= comment.content %></li>
+  </ul>
+<% end %>
+<div>
+
+<%= link_to "戻る", user_path(@user.id) %>
+
+
+
+

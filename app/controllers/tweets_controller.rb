@@ -1,4 +1,5 @@
 class TweetsController < ApplicationController
+  
 
   def index
     @tweets = Tweet.all
@@ -21,6 +22,9 @@ class TweetsController < ApplicationController
   end
 
   def show
+    @user = User.find(current_user.id)
+    @tweet = Tweet.find(params[:id])
+    
   end
 
   def edit
@@ -33,6 +37,7 @@ class TweetsController < ApplicationController
   end
 
   private
+
   def params_tweet
     params.require(:tweet).permit(:content)
   end

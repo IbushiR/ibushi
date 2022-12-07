@@ -1,6 +1,6 @@
 <h1>ibutter</h1>
 
-<%= @user.name %>
+<h2><%= @user.name %></h2>
 
 <%= link_to "プロフィール", profile_path %>
 
@@ -13,7 +13,7 @@
 
 <% @user.tweets.each do |tweet| %>
   <ul>
-    <li><%= tweet.content %></li>
+    <li><%= link_to "#{tweet.content}", tweet_path(tweet) %></li>
   </ul>
 <% end %>
 
@@ -25,8 +25,8 @@
   <% user.tweets.each do |tweetes| %>
     <ul>
       <li>
-        <h5><%= user.name %><br></h5>
-        <%= tweetes.content %><br>
+        <h5><%= user.name %></h5><br>
+        <%= link_to "#{tweetes.content}", tweet_path(tweetes.id) %><br>
         <%= tweetes.created_at.strftime('%Y/%m/%d %H:%M') %>
       </li>
     </ul>
