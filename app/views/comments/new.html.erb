@@ -1,5 +1,7 @@
-<%= @user.name %>
+<%= @tweet.content %>
 
-<%= render "form", comment: @comment %>
+<%= render "form" %>
+
+<%= link_to "戻る", tweet_path(@tweet) %>
 
 

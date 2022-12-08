@@ -4,9 +4,10 @@ Rails.application.routes.draw do
 
   resources :users
   resources :profiles
-  resources :tweets
-  resources :comments
-
+  resources :tweets do
+    resources :comments
+  end
+  root 'application#root'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
