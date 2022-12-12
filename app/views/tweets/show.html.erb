@@ -1,7 +1,7 @@
 <div>
   <p><%= @tweet.content %></p>
   <p><%= @tweet.user.name %>
-  <p><%= @tweet.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+  <p><%= l @tweet.created_at, format: :long %></p>
 </div>
 
 <br>
@@ -17,7 +17,7 @@
   <ul>
     <li><%= comment.content %></li>
     <%= comment.user.name %>
-    <%= comment.created_at.strftime('%Y/%m/%d %H:%M') %>
+    <%= l comment.created_at, format: :long %>
   </ul>
 <% end %>
 <div>

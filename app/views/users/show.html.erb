@@ -3,7 +3,7 @@
 <div class="container">
 <h2><%= @user.name %></h2>
 
-<%= link_to "プロフィール", profile_path %>
+<%= link_to "プロフィール", profiles_path %>
 
 <%= link_to "ツイート", new_tweet_path %>
 
@@ -23,15 +23,14 @@
 <p>みんなの反応</p>
 <table class="table">
 <tbody>
-  <% @users.each do |user| %>
-    <% user.tweets.each do |tweetes| %>
-      <tr><th><%= user.name %><br>
-        <%= link_to "#{tweetes.content}", tweet_path(tweetes.id) %><br>
-        <%= tweetes.created_at.strftime('%Y/%m/%d %H:%M') %><br></th></tr>
+    <% @tweets.each do |tweets| %>
+      <tr><th><%= tweets.user.name %><br>
+        <%= link_to "#{tweets.content}", tweet_path(tweets.id) %><br>
+        <%= l tweets.created_at, format: :long %><br></th></tr>
   <% end %>
-<% end %>
 </tbody>
 </table>
-</div>
+
+<%= paginate @tweets %>
 
 

@@ -1,17 +1,15 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  resources :profiles
+
+  resource :profiles
 
   resources :users
-  resources :tweets do
-    resources :comments
+
+  resources :tweets, except: %i(edit update) do
+    resources :comments, only: %i(new create)
   end
   
-  root 'application#root'
+  root 'tweets#show'
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
 end

@@ -1,21 +1,12 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: %i[ show edit update destroy ]
-
-  def index
-    
-  end
+  before_action :set_tweet, only: %i[ new create ]
 
   def new
-    @user = User.find(current_user.id)
-    @tweet = Tweet.find(params[:tweet_id])
-    @comment = @tweet.comments.new
+    @comment = @tweet.comments.build
   end
 
   def create
-    @user = User.find(current_user.id)
-    @tweet = Tweet.find(params[:tweet_id])
-    @comment = @tweet.comments.new(params_comment)
-    @comment.user = @user
+    @comment = @tweet.comments.build(user: current_user, content: comment_params[:content])
     if @comment.save
       redirect_to tweet_url(@tweet)
     else
@@ -24,26 +15,12 @@ class CommentsController < ApplicationController
     
   end
 
-  def show
-    
-  end
-
-  def edit
-  end
-
-  def update
-  end
-
-  def destroy
-  end
-
   private
-  def set_comment
-    @user = User.find(current_user.id)
-    @tweet = Tweet.find(params[:id])
+  def set_tweet
+    @tweet = Tweet.find(params[:tweet_id])
   end
 
-  def params_comment
+  def comment_params
     params.require(:comment).permit(:content)
   end
 

@@ -20,6 +20,7 @@ class UsersController < ApplicationController
   end
   
   def show
+    @tweets = Tweet.page(params[:page]).per(5)
     @users = User.all
   end
 

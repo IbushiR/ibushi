@@ -9,7 +9,7 @@ class ProfilesController < ApplicationController
 
   def update
     if @user.update(params_user)
-      redirect_to profile_url(@user)
+      redirect_to profiles_url(@user)
     else
       render :edit, status: :unprocessble_entity
     end

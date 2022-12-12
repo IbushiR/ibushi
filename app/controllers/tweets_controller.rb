@@ -1,36 +1,25 @@
 class TweetsController < ApplicationController
-  
 
   def index
     @tweets = Tweet.all
   end
 
   def new
-    @user = User.find(current_user.id)
-    @tweet = @user.tweets.new
+    @tweet = current_user.tweets.build
   end
 
   def create
-    @user = User.find(current_user.id)
-    @tweet = @user.tweets.new(params_tweet)
+    @tweet = current_user.tweets.build(tweet_params)
     if @tweet.save
-      redirect_to user_url(@user)
+      redirect_to user_url(current_user)
     else
       render :new, status: :unprocessble_entity
-    end
-    
+    end    
   end
 
   def show
     @user = User.find(current_user.id)
     @tweet = Tweet.find(params[:id])
-    
-  end
-
-  def edit
-  end
-
-  def update
   end
 
   def destroy
@@ -38,7 +27,7 @@ class TweetsController < ApplicationController
 
   private
 
-  def params_tweet
+  def tweet_params
     params.require(:tweet).permit(:content)
   end
 
