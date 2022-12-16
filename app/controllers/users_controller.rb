@@ -1,10 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[  show edit create destroy ]
 
-  def index
-    @users = User.all
-  end
-
   def new
     @user = User.new
     
@@ -22,16 +18,6 @@ class UsersController < ApplicationController
   def show
     @tweets = Tweet.page(params[:page]).per(5)
     @users = User.all
-  end
-
-
-  def edit
-  end
-
-  def create
-  end
-
-  def destroy
   end
 
   private

@@ -1,36 +1,36 @@
-<%= render "navber" %>
-<br>
-<div class="container">
-<h2><%= @user.name %></h2>
+<div class="sticky-top">
+  <div class="container-fluid" style="border-bottom: solid 2px #000000;">
+    <div class="row">
+      <%= render "navber" %>
+    </div>
+  </div>
+</div>
 
-<%= link_to "プロフィール", profiles_path %>
-
-<%= link_to "ツイート", new_tweet_path %>
-
-
-<%= button_to "ログアウト", destroy_user_session_path, method: :delete %>
-
-<p>自分のツイート</p>
-
-<% @user.tweets.each do |tweet| %>
-  <ul>
-    <li><%= link_to "#{tweet.content}", tweet_path(tweet) %></li>
-  </ul>
-<% end %>
-
-<br>
-
-<p>みんなの反応</p>
-<table class="table">
-<tbody>
-    <% @tweets.each do |tweets| %>
-      <tr><th><%= tweets.user.name %><br>
-        <%= link_to "#{tweets.content}", tweet_path(tweets.id) %><br>
-        <%= l tweets.created_at, format: :long %><br></th></tr>
-  <% end %>
-</tbody>
-</table>
-
-<%= paginate @tweets %>
-
-
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-2 px-0" style="height: 100vh">
+      <div class="sidebar_fixed text-center ex1">
+        <h1><%= @user.name %></h1>
+        <%= link_to "プロフィール", profiles_path %><br>
+        <%= link_to "ツイート", new_tweet_path %><br>
+        <%= button_to "ログアウト", destroy_user_session_path, method: :delete %>
+      </div>
+    </div>
+    <div class="col-sm-10 px-0">
+      <% @tweets.each do |tweets| %>
+        <div class="card text-center">
+          <div class="card-header">
+            <%= tweets.user.name %>
+          </div>
+          <div class="card-body">
+            <%= link_to "#{tweets.content}", tweet_path(tweets.id) %>
+          </div>
+          <div class="card-footer text-muted">
+            <%= l tweets.created_at, format: :long %>
+          </div>
+        </div>
+      <% end %>
+      <%= paginate @tweets %>
+    </div>
+  </div>
+</div>

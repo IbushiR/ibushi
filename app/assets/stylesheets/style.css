@@ -1,0 +1,12 @@
+.ex1 {
+  font-size:16px;
+  line-height:50px;
+}
+.sidebar_fixed {
+  position: sticky;
+  top: 85px;
+}
+.col-sm-2 {
+  border-right: solid 2px #000000;
+  background-color: #CCFFFF;
+}

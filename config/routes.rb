@@ -7,9 +7,11 @@ Rails.application.routes.draw do
   resources :users
 
   resources :tweets, except: %i(edit update) do
-    resources :comments, only: %i(new create)
+    resources :favorites, only: %i(create destroy)
+    resources :comments, only: %i(new create) 
   end
-  
+
+
   root 'tweets#show'
 
 end
