@@ -23,6 +23,9 @@
     <%= form.text_area :description, size: "40x2" %>
   </div>
   <div>
+    <%= form.file_field :avatar %>
+  </div>
+  <div>
     <%= form.submit "変更" %>
   </div>
 <% end %>

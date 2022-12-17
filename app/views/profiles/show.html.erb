@@ -1,9 +1,12 @@
 <%= render "navber" %>
 
 <div class="container">
+<% if user.avatar.attached? >
+<%= image_tag user.avatar.variant(:thumb) %>
+<% end %>
   <h2>自己紹介:　<%= @user.description %></h2><br>
-  <h2>フォロー数<%= @user.follow_count %></h2><br>
-  <h2>フォロワー数<%= @user.follower_count %></h2><br>
+  <h2>フォロー数</h2><br>
+  <h2>フォロワー数</h2><br>
   <h4><%= link_to "設定", edit_profiles_path %></h4><br>
   <h4><%= link_to "戻る", user_path(@user) %></h4>
 </div>
