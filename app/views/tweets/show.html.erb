@@ -1,53 +1,59 @@
-<div>
-  <div class="card text-center">
-  <div class="card-header">
-    <%= @tweet.user.name %>
-  </div>
-  <div class="card-body">
-    <%= @tweet.content %>
-  </div>
-  <div class="card-footer text-muted">
-    <%= l @tweet.created_at, format: :long %>
-    <%= @tweet.favorites.size %>
-  </div>
+<%= render "navber" %>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-2 px-0" style="height: 100vh">
+      <div class="sidebar_fixed text-center ex1">
+        <h1><%= @user.name %></h1>
+        <%= link_to "プロフィール", profiles_path %><br>
+        <%= link_to "ツイート", new_tweet_path %><br>
+        <%= button_to "ログアウト", destroy_user_session_path, method: :delete %>
+      </div>
+    </div>
+    <div class="col-sm-10 px-0">
+      <div class="card text-center">
+        <div class="card-header">
+          <%= @tweet.user.name %>
+        </div>
+        <div class="card-body">
+          <%= @tweet.content %>
+        </div>
+        <div class="card-footer text-muted">
+          <%= l @tweet.created_at, format: :long %>
+          <%= @tweet.favorites.size %>
+        </div>
+      </div>
+      <br>
+      <div class="d-flex">
+        <h3><%= link_to "返信", new_tweet_comment_path(@tweet) %></h3>
+        <% if @tweet.favorited?(current_user) %>
+          <%= button_to tweet_favorite_path(@tweet.id), method: :delete do %>
+            <span style="color:red;"><h3>&hearts;いいね</h3></span>
+          <% end %>
+        <% else %>
+          <%= button_to tweet_favorites_path(@tweet.id), method: :post do %>
+            <div style="color: silver;"><h3>&hearts;いいね</h3></div>
+          <% end %>
+        <% end %>
+      </div>
+      <br>
+      <div>
+      <% @tweet.comments.each do |comment| %>
+        <div class="card text-center">
+          <div class="card-header">
+            <%= comment.user.name %>
+          </div>
+          <div class="card-body">
+            <%= comment.content %>
+          </div>
+          <div class="card-footer text-muted">
+            <%= l comment.created_at, format: :long %>
+          </div>
+        </div>
+      <% end %>
+      <div>
+      <%= link_to "戻る", user_path(@user.id) %>
+      </div>
+    </div>
   </div>
 </div>
-
-<br>
-
-<div>
-  <%= link_to "返信", new_tweet_comment_path(@tweet) %>
-</div>
-
-<% if @tweet.favorited?(current_user) %>
-    # 一致するレコードが存在する＝すでにいいね済みの場合はdestroyアクションへ
-    <%= button_to tweet_favorite_path(@tweet.id), method: :delete do %>
-        <span style="color:red;">❤︎</span>
-    <% end %>
-<% else %>
-    # 一致するレコードが存在しない＝まだいいねしていない場合はcreateアクションへ
-    <%= button_to tweet_favorites_path(@tweet.id), method: :post do %>
-        <span>❤︎</span>
-    <% end %>
-<% end %>
-
-<br>
-
-<div>
-<% @tweet.comments.each do |comment| %>
-  <div class="card text-center">
-  <div class="card-header">
-    <%= comment.user.name %>
-  </div>
-  <div class="card-body">
-  <%= comment.content %>
-  </div>
-  <div class="card-footer text-muted">
-  <%= l comment.created_at, format: :long %>
-  </div>
-  </div>
-<% end %>
-<div>
-
-<%= link_to "戻る", user_path(@user.id) %>
-

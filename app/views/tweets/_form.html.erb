@@ -1,3 +1,5 @@
+<center>
+<h1><%= current_user.name %>さんの投稿</h1>
 <%= form_with(model: tweet) do |form| %>
   <% if tweet.errors.any? %>
     <div style="color: red">
@@ -10,15 +12,13 @@
         </ul>
     </div>
   <% end %>
-
   <div>
     <%= form.label :content, "ツイート", style: "display: block" %>
-    <%= form.text_area :content %>
+    <%= form.text_area :content, size: "50x5" %>
   </div>
 
   <div>
     <%= form.submit "投稿" %>
   <div>
-
 <% end %>
-  
+</center>

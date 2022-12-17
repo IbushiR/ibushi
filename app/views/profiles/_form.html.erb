@@ -1,33 +1,29 @@
+<center>
 <%= form_with(model: user, url: profiles_path(user)) do |form| %>
   <% if user.errors.any? %>
     <div style="color: red">
       <h2><% pluralize(user.errors.count, "error") %>間違いあるよ</h2>
-
-        <ul>
-          <% user.errors.each do |error| %>
-            <li><%= error.full_message %></li>
-          <% end %>
-        </ul>
+      <ul>
+        <% user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
     </div>
   <% end %>
-
   <div>
     <%= form.label :name, "名前", style: "display: block" %>
     <%= form.text_field :name %>
   </div>
-
   <div>
     <%= form.label :email, "メールアドレス", style: "display: block" %>
-    <%= form.text_area :email %>
+    <%= form.text_area :email, size: "40x2" %>
   </div>
-
   <div>
     <%= form.label :description, "自己紹介", style: "display: block" %>
-    <%= form.text_area :description %>
+    <%= form.text_area :description, size: "40x2" %>
   </div>
-
   <div>
     <%= form.submit "変更" %>
   </div>
-
 <% end %>
+</center>

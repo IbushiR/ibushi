@@ -1,13 +1,9 @@
-<h1><%= @user.name %>さんのプロフィール</h1>
+<%= render "navber" %>
 
-
-<p>フォロー数<%= @user.follow_count %></p>
-  
-<p>フォロワー数<%= @user.follower_count %></p>
-
-<p>自己紹介<%= @user.description %></p>
-
-<%= link_to "設定", edit_profiles_path %>
-
-<%= link_to "戻る", user_path(@user) %>
-
+<div class="container">
+  <h2>自己紹介:　<%= @user.description %></h2><br>
+  <h2>フォロー数<%= @user.follow_count %></h2><br>
+  <h2>フォロワー数<%= @user.follower_count %></h2><br>
+  <h4><%= link_to "設定", edit_profiles_path %></h4><br>
+  <h4><%= link_to "戻る", user_path(@user) %></h4>
+</div>

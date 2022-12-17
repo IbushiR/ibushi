@@ -1,3 +1,5 @@
+<center>
+<h1><%= @tweet.content %>　に返信</h1>
 <%= form_with model: [@tweet, @comment] do |form| %>
   <% if @comment.errors.any? %>
     <div style="color: red">
@@ -13,7 +15,7 @@
 
   <div>
     <%= form.label :content, "返信", style: "display: block" %>
-    <%= form.text_area :content %>
+    <%= form.text_area :content, size: "50x5" %>
   </div>
 
   <div>
@@ -21,4 +23,5 @@
   <div>
 
 <% end %>
+</center>
   
