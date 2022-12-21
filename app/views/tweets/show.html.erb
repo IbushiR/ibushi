@@ -1,31 +1,44 @@
+<div class="sideline">
 <%= render "navber" %>
 
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-2 px-0" style="height: 100vh">
-      <div class="sidebar_fixed text-center ex1">
+      <div class="sidebar_fixed ex1">
         <h1><%= @user.name %></h1>
-        <%= link_to "プロフィール", profiles_path %><br>
-        <%= link_to "ツイート", new_tweet_path %><br>
-        <%= button_to "ログアウト", destroy_user_session_path, method: :delete %>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><%= link_to profiles_path do %>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" style="width: 20px; height: 20px;">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+            </svg>
+            <span>プロフィール</span>
+          <% end %></li>
+          <li class="list-group-item"><%= link_to new_tweet_path do %>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" style="width: 20px; height: 20px;">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z" />
+            </svg>
+          <span>ツイート</span>
+          <% end %></li>
+          <li class="list-group-item"><%= button_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+        </ul>
       </div>
     </div>
     <div class="col-sm-10 px-0">
-      <div class="card text-center">
+      <div class="card">
         <div class="card-header">
-          <%= @tweet.user.name %>
+          <h4><%= @tweet.user.name %></h4>
         </div>
         <div class="card-body">
-          <%= @tweet.content %>
+          <h4><%= @tweet.content %></h4>
         </div>
         <div class="card-footer text-muted">
-          <%= l @tweet.created_at, format: :long %>
-          <%= @tweet.favorites.size %>
+          <h4><%= l @tweet.created_at, format: :long %>
+          <%= @tweet.favorites.size %></h4>
         </div>
       </div>
-      <br>
-      <div class="d-flex">
-        <h3><%= link_to "返信", new_tweet_comment_path(@tweet) %></h3>
+      <div class="d-flex mt-4 justify-content-center">
+        <h3 class="mt-2 mx-5"><%= link_to "返信", new_tweet_comment_path(@tweet) %></h3>
+        <div class="mx-3">
         <% if @tweet.favorited?(current_user) %>
           <%= button_to tweet_favorite_path(@tweet.id), method: :delete do %>
             <span style="color:red;"><h3>&hearts;いいね</h3></span>
@@ -35,11 +48,12 @@
             <div style="color: silver;"><h3>&hearts;いいね</h3></div>
           <% end %>
         <% end %>
+        </div>
       </div>
       <br>
       <div>
       <% @tweet.comments.each do |comment| %>
-        <div class="card text-center">
+        <div class="card">
           <div class="card-header">
             <%= comment.user.name %>
           </div>
@@ -56,4 +70,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

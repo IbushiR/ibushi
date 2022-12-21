@@ -1,7 +1,4 @@
 <div class="container-fuild">
-<h1 class="text-center"><%= @user.name %>さんの設定</h1>
-
-<%= render "form", user: @user %><br>
-
-<%= link_to "戻る", profiles_path %>
+  <%= render "form", user: @user %><br>
+  <p class="text-center"><%= link_to "戻る", profiles_path %></p>
 </div>

@@ -1,4 +1,5 @@
-<center>
+<div class="container" style="width: 500px; border: 2px solid #dcdcdc; border-radius: 10px; padding: 20px 80px; margin-top: 60px">
+<h1 class="text-center"><%= @user.name %>さんの設定</h1>
 <%= form_with(model: user, url: profiles_path(user)) do |form| %>
   <% if user.errors.any? %>
     <div style="color: red">
@@ -10,23 +11,23 @@
       </ul>
     </div>
   <% end %>
-  <div>
-    <%= form.label :name, "名前", style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="field">
+    <%= form.label :name, "名前", class: 'form-label' %>
+    <%= form.text_field :name, size: "50", class: 'form-control' %>
   </div>
-  <div>
-    <%= form.label :email, "メールアドレス", style: "display: block" %>
-    <%= form.text_area :email, size: "40x2" %>
+  <div class="field">
+    <%= form.label :email, "メールアドレス", class: 'form-label' %>
+    <%= form.text_area :email, size: "50x2", class: 'form-control' %>
   </div>
-  <div>
-    <%= form.label :description, "自己紹介", style: "display: block" %>
-    <%= form.text_area :description, size: "40x2" %>
+  <div class="field">
+    <%= form.label :description, "自己紹介", class: 'form-label' %>
+    <%= form.text_area :description, size: "50x5", class: 'form-control' %>
   </div>
-  <div>
+  <div class="actions mt-4" style="text-align: center;">
     <%= form.file_field :avatar %>
   </div>
-  <div>
-    <%= form.submit "変更" %>
+  <div class="actions mt-4" style="text-align: center;">
+    <%= form.submit "変更", class: 'btn btn-primary' %>
   </div>
 <% end %>
-</center>
+</div>

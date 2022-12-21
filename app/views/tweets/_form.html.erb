@@ -1,4 +1,4 @@
-<center>
+<div class="container" style="width: 500px; border: 2px solid #dcdcdc; border-radius: 10px; padding: 20px 80px; margin-top: 60px">
 <h1><%= current_user.name %>さんの投稿</h1>
 <%= form_with(model: tweet) do |form| %>
   <% if tweet.errors.any? %>
@@ -12,13 +12,13 @@
         </ul>
     </div>
   <% end %>
-  <div>
-    <%= form.label :content, "ツイート", style: "display: block" %>
-    <%= form.text_area :content, size: "50x5" %>
+  <div class="field">
+    <%= form.label :content, "ツイート", class: 'form-label'%>
+    <%= form.text_area :content, size: "50x5", class: 'form-control' %>
   </div>
 
-  <div>
-    <%= form.submit "投稿" %>
+  <div class="actions mt-4" style="text-align: center;">
+    <%= form.submit "投稿", class: 'btn btn-primary' %>
   <div>
 <% end %>
-</center>
+</div>

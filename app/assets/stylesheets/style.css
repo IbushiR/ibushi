@@ -7,6 +7,9 @@
   top: 85px;
 }
 .col-sm-2 {
-  border-right: solid 2px #000000;
-  background-color: #CCFFFF;
+  border-right: solid 2px #3c3a3a;
+  /* background-color: #CCFFFF; */
+}
+.sideline {
+  border: solid 2px #3c3a3a
 }

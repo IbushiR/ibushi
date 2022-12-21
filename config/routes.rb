@@ -11,7 +11,4 @@ Rails.application.routes.draw do
     resources :comments, only: %i(new create) 
   end
 
-
-  root 'tweets#show'
-
 end
