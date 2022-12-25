@@ -5,8 +5,14 @@
   <div class="row">
     <div class="col-sm-2 px-0" style="height: 100vh">
       <div class="sidebar_fixed ex1">
-        <h1><%= @user.name %></h1>
+        <h1><%= current_user.name %></h1>
         <ul class="list-group list-group-flush">
+        <li class="list-group-item"><%= link_to user_path(current_user) do %>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" style="width: 20px; height: 20px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+          </svg>
+          <span>ホーム</span>
+        <% end %></li>
           <li class="list-group-item"><%= link_to profiles_path do %>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" style="width: 20px; height: 20px;">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
@@ -25,8 +31,15 @@
     </div>
     <div class="col-sm-10 px-0">
       <div class="card">
-        <div class="card-header">
-          <h4><%= @tweet.user.name %></h4>
+        <div class="card-header">        
+          <div class="name">
+            <h4><%= @tweet.user.name %></h4>
+          </div>
+          <% if current_user.following?(@tweet.user) %>
+            <%= button_to "フォロー外す", user_relationships_path(@tweet.user.id), method: :delete, class: "follow" %>
+          <% else %>
+            <%= button_to "フォローする", user_relationships_path(@tweet.user.id), method: :post, class: "follow" %>
+          <% end %>
         </div>
         <div class="card-body">
           <h4><%= @tweet.content %></h4>
@@ -52,21 +65,28 @@
       </div>
       <br>
       <div>
-      <% @tweet.comments.each do |comment| %>
+      <% @comments.each do |comments| %>
         <div class="card">
           <div class="card-header">
-            <%= comment.user.name %>
+            <div class="name">
+              <%= comments.user.name %>
+            </div>
+            <% if current_user.following?(comments.user) %>
+              <%= button_to "フォロー外す", user_relationships_path(comments.user.id), method: :delete, class: "follow" %>
+            <% else %>
+              <%= button_to "フォローする", user_relationships_path(comments.user.id), method: :post, class: "follow" %>
+            <% end %>
           </div>
           <div class="card-body">
-            <%= comment.content %>
+            <%= comments.content %>
           </div>
           <div class="card-footer text-muted">
-            <%= l comment.created_at, format: :long %>
+            <%= l comments.created_at, format: :long %>
           </div>
         </div>
       <% end %>
-      <div>
-      <%= link_to "戻る", user_path(@user.id) %>
+      <div class="mt-2">
+        <%= paginate @comments %>
       </div>
     </div>
   </div>

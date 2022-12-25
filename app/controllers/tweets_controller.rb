@@ -20,9 +20,13 @@ class TweetsController < ApplicationController
   def show
     @user = User.find(current_user.id)
     @tweet = Tweet.find(params[:id])
+    @comments = @tweet.comments.order(created_at: :desc).page(params[:page]).per(5)
   end
 
-  def destroy
+  def search
+    @tweets = Tweet.search(params[:keyword]).order(created_at: :desc).page(params[:page]).per(5)
+    @keyword = params[:keyword]
+    render "search"
   end
 
   private

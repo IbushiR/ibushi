@@ -1,5 +1,6 @@
 <div class="sideline">
 <%= render "navber" %>
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-2 px-0" style="height: 100vh">
@@ -45,7 +46,7 @@
             <%= link_to "#{tweets.content}", tweet_path(tweets.id) %>
           </div>
           <div class="card-footer text-muted">
-            <%= l tweets.created_at, format: :long %>            
+            <%= l tweets.created_at, format: :long %>
           </div>
         </div>
       <% end %>

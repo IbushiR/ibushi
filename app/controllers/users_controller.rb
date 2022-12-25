@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   end
   
   def show
-    @tweets = Tweet.page(params[:page]).per(5)
+    @tweets = Tweet.order(created_at: :desc).page(params[:page]).per(5)
     @users = User.all
   end
 

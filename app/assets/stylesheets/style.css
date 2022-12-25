@@ -6,10 +6,33 @@
   position: sticky;
   top: 85px;
 }
-.col-sm-2 {
-  border-right: solid 2px #3c3a3a;
+.col-sm-10 {
+  border-left: solid 2px #3c3a3a;
   /* background-color: #CCFFFF; */
 }
 .sideline {
-  border: solid 2px #3c3a3a
+  border: solid 2px #3c3a3a;
+}
+.f {
+  clear: right;
+}
+.card-header {
+  display: inline-flex;
+}
+.card-header .name {
+  margin-right: 50px;
+}
+.follow {
+  display       : inline-block;
+  border-radius : 5%;          /* 角丸       */
+  font-size     : 9pt;        /* 文字サイズ */
+  text-align    : center;      /* 文字位置   */
+  cursor        : pointer;     /* カーソル   */
+  padding       : 8px 12px;   /* 余白       */
+  background    : #0cd7ff;     /* 背景色     */
+  color         : #ffffff;     /* 文字色     */
+  line-height   : 1em;         /* 1行の高さ  */
+  transition    : .3s;         /* なめらか変化 */
+
+  border        : 2px solid #666666;    /* 枠の指定 */
 }
