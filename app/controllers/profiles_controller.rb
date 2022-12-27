@@ -1,4 +1,4 @@
-class ProfilesController < ApplicationController
+class ProfilesController < BaseController
   before_action :set_profile, only: %i[ show edit update ]
 
   def show

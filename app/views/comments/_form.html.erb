@@ -1,5 +1,5 @@
 <div class="container" style="width: 500px; border: 2px solid #dcdcdc; border-radius: 10px; padding: 20px 80px; margin-top: 60px">
-<h1><%= @tweet.content %>　に返信</h1>
+<h1><%= @tweet.user.name %>に返信</h1>
 <%= form_with model: [@tweet, @comment] do |form| %>
   <% if @comment.errors.any? %>
     <div style="color: red">

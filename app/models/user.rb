@@ -11,10 +11,9 @@ class User < ApplicationRecord
   has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: 'follow_id', dependent: :destroy
   has_many :followers, through: :reverse_of_relationships, source: :user
   has_one_attached :avatar do |attachable|
-    attachable.variant :thumb, resize_to_limit: [100, 100]
+    attachable.variant :thumb, resize_to_limit: [130, 130]
   end
 
-    # フォローしたときの処理
   def follow(user_id)
     relationships.create(follow_id: user_id)
   end

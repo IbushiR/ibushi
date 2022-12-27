@@ -1,4 +1,4 @@
-class CommentsController < ApplicationController
+class CommentsController < BaseController
   before_action :set_tweet, only: %i[ new create ]
 
   def new

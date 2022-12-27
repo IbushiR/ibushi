@@ -1,7 +1,8 @@
-class TweetsController < ApplicationController
+class TweetsController < BaseController
 
   def index
-    @tweets = Tweet.all
+    @tweets = Tweet.order(created_at: :desc).page(params[:page]).per(5)
+    @tweets = @tweets.search(params[:keyword]) if params[:keyword].present?
   end
 
   def new
@@ -18,7 +19,6 @@ class TweetsController < ApplicationController
   end
 
   def show
-    @user = User.find(current_user.id)
     @tweet = Tweet.find(params[:id])
     @comments = @tweet.comments.order(created_at: :desc).page(params[:page]).per(5)
   end

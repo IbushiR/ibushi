@@ -15,6 +15,6 @@ Rails.application.routes.draw do
     resources :comments, only: %i(new create) 
   end
 
-  get 'search' => 'tweets#search'
+  root 'tweets#show'
 
 end

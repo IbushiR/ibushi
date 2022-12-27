@@ -14,7 +14,7 @@ gem "bootsnap", require: false
 gem "devise"
 gem 'kaminari'
 gem 'bootstrap', '~> 4.5.0'
-gem 'jquery-rails'
+gem 'image_processing'
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
