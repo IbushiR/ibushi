@@ -35,6 +35,19 @@
   transition    : .3s; 
   border        : 2px solid #666666;
 }
+.followed {
+  display       : inline-block;
+  border-radius : 5%;          /* 角丸       */
+  font-size     : 9pt;        /* 文字サイズ */
+  text-align    : center;      /* 文字位置   */
+  cursor        : pointer;     /* カーソル   */
+  padding       : 8px 12px;   /* 余白       */
+  background    : #a6a6a6;     /* 背景色     */
+  color         : #ffffff;     /* 文字色     */
+  line-height   : 1em;         /* 1行の高さ  */
+  transition    : .3s;         /* なめらか変化 */
+  border        : 2px solid #666666;    /* 枠の指定 */
+}
 .centering_parent {
   text-align: center;
 }

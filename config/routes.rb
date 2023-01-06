@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resource :profiles
+  resources :profiles
 
   resources :users do
     resource :relationships, only: [:create, :destroy]
@@ -15,6 +15,6 @@ Rails.application.routes.draw do
     resources :comments, only: %i(new create) 
   end
 
-  root 'tweets#show'
+  root 'tweets#index'
 
 end

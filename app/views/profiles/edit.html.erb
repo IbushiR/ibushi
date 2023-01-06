@@ -1,4 +1,4 @@
 <div class="container-fuild">
   <%= render "form", user: @user %><br>
-  <p class="text-center"><%= link_to "戻る", profiles_path %></p>
+  <p class="text-center"><%= link_to "戻る", profile_path(current_user) %></p>
 </div>

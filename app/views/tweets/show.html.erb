@@ -3,46 +3,20 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-2 px-0" style="height: 100vh">
-      <div class="sidebar_fixed ex1">
-        <div class="centering_parent">
-          <div class="my-2">
-            <%= image_tag current_user.avatar.variant(:thumb) %>
-          </div>
-          <h3><%= current_user.name %></h3>
-        </div>
-        <ul class="list-group list-group-flush">
-        <li class="list-group-item"><%= link_to tweets_path do %>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" style="width: 20px; height: 20px;">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-          </svg>
-          <span>ホーム</span>
-        <% end %></li>
-          <li class="list-group-item"><%= link_to profiles_path do %>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" style="width: 20px; height: 20px;">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-            </svg>
-            <span>プロフィール</span>
-          <% end %></li>
-          <li class="list-group-item"><%= link_to new_tweet_path do %>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" style="width: 20px; height: 20px;">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z" />
-            </svg>
-          <span>ツイート</span>
-          <% end %></li>
-          <li class="list-group-item"><%= button_to "ログアウト", destroy_user_session_path, method: :delete %></li>
-        </ul>
-      </div>
+      <%= render "shared/sidever" %>
     </div>
     <div class="col-sm-10 px-0">
       <div class="card">
         <div class="card-header">        
           <div class="name">
-            <h4><%= @tweet.user.name %></h4>
+            <h4> <%= link_to "#{@tweet.user.name}", profile_path(@tweet.user.id) %></h4>
           </div>
-          <% if current_user.following?(@tweet.user) %>
-            <%= button_to "フォロー外す", user_relationships_path(@tweet.user.id), method: :delete, class: "follow" %>
-          <% else %>
-            <%= button_to "フォローする", user_relationships_path(@tweet.user.id), method: :post, class: "follow" %>
+          <% unless @tweet.user == current_user %>
+            <% if current_user.following?(@tweet.user) %>
+              <%= button_to "フォロー外す", user_relationships_path(@tweet.user.id), method: :delete, class: "followed" %>
+            <% else %>
+              <%= button_to "フォローする", user_relationships_path(@tweet.user.id), method: :post, class: "follow" %>
+            <% end %>
           <% end %>
         </div>
         <div class="card-body">
@@ -56,15 +30,23 @@
         </div>
       </div>
       <div class="d-flex mt-4 justify-content-center">
-        <h3 class="mt-2 mx-5"><%= link_to "返信", new_tweet_comment_path(@tweet) %></h3>
+        <h3 class="mt-2 mx-5"><%= link_to new_tweet_comment_path(@tweet) do %>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" style="width: 30px; height: 30px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 9.75a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 01.778-.332 48.294 48.294 0 005.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
+          </svg>
+          <span>返信</span>
+        </h3>
+        <% end %>
         <div class="mx-3">
-        <% if @tweet.favorited?(current_user) %>
-          <%= button_to tweet_favorite_path(@tweet.id), method: :delete do %>
-            <span style="color:red;"><h3>&hearts;いいね</h3></span>
-          <% end %>
-        <% else %>
-          <%= button_to tweet_favorites_path(@tweet.id), method: :post do %>
-            <div style="color: silver;"><h3>&hearts;いいね</h3></div>
+          <% unless @tweet.user == current_user %>
+          <% if @tweet.favorited?(current_user) %>
+            <%= button_to tweet_favorite_path(@tweet.id), method: :delete do %>
+              <span style="color: red;"><h3>&hearts;いいね</h3></span>
+            <% end %>
+          <% else %>
+            <%= button_to tweet_favorites_path(@tweet.id), method: :post do %>
+              <div style="color: silver;"><h3>&hearts;いいね</h3></div>
+            <% end %>
           <% end %>
         <% end %>
         </div>
@@ -75,12 +57,14 @@
         <div class="card">
           <div class="card-header">
             <div class="name">
-              <%= comments.user.name %>
+              <%= link_to "#{comments.user.name}", profile_path(comments.user.id) %>
             </div>
-            <% if current_user.following?(comments.user) %>
-              <%= button_to "フォロー外す", user_relationships_path(comments.user.id), method: :delete, class: "follow" %>
-            <% else %>
-              <%= button_to "フォローする", user_relationships_path(comments.user.id), method: :post, class: "follow" %>
+            <% unless comments.user == current_user %>
+              <% if current_user.following?(comments.user) %>
+                <%= button_to "フォロー外す", user_relationships_path(comments.user.id), method: :delete, class: "followed" %>
+              <% else %>
+                <%= button_to "フォローする", user_relationships_path(comments.user.id), method: :post, class: "follow" %>
+              <% end %>
             <% end %>
           </div>
           <div class="card-body">

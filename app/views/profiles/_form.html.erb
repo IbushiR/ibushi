@@ -1,6 +1,6 @@
 <div class="container" style="width: 500px; border: 2px solid #dcdcdc; border-radius: 10px; padding: 20px 80px; margin-top: 60px">
 <h1 class="text-center"><%= @user.name %>さんの設定</h1>
-<%= form_with(model: user, url: profiles_path(user)) do |form| %>
+<%= form_with(model: user, url: profile_path(@user)) do |form| %>
   <% if user.errors.any? %>
     <div style="color: red">
       <h2><% pluralize(user.errors.count, "error") %>間違いあるよ</h2>

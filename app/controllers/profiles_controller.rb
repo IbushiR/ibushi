@@ -9,7 +9,7 @@ class ProfilesController < BaseController
 
   def update
     if @user.update(params_user)
-      redirect_to profiles_url(@user)
+      redirect_to profile_url(@user)
     else
       render :edit, status: :unprocessble_entity
     end
@@ -17,7 +17,7 @@ class ProfilesController < BaseController
 
   private
   def set_profile
-    @user = User.find(current_user.id)
+    @user = User.find(params[:id])
   end
 
   def params_user

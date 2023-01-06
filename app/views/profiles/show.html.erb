@@ -1,13 +1,19 @@
 <div class="sideline">
-<%= render "navber" %>
-
-<div class="container">
-
-  <h2>自己紹介:　<%= current_user.description %></h2>
-  <%= image_tag current_user.avatar.variant(:thumb) %>
-  <h2 class="mt-5">フォロー数<%= current_user.followings.count %></h2>
-  <h2 class="mt-5">フォロワー数<%= current_user.followers.count %></h2>
-  <h4 class="mt-5"><%= link_to "設定", edit_profiles_path %></h4>
-  <h4 class="mt-5"><%= link_to "戻る", tweets_path %></h4>
-</div>
+  <%= render "navber" %>
+  <div class="container">
+    <div class="my-2">
+      <% if @user.avatar.attached? %>
+        <%= image_tag @user.avatar.variant(:thumb) %>
+      <% else %>
+        <%= image_tag 'no_image_logo.png', :size => '210x140' %>
+      <% end %>
+    </div>
+    <h2>自己紹介:　<%= @user.description %></h2>
+    <h2 class="mt-5">フォロー数<%= @user.followings.count %></h2>
+    <h2 class="mt-5">フォロワー数<%= @user.followers.count %></h2>
+    <% if @user == current_user %>
+    <h4 class="mt-5"><%= link_to "設定", edit_profile_path %></h4>
+    <% end %>
+    <h4 class="mt-5"><%= link_to "戻る", tweets_path %></h4>
+  </div>
 </div>
